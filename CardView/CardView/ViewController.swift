@@ -23,6 +23,7 @@ class ViewController: UIViewController {
         
         cardView = CardView(frame: CGRect(x: 0, y: 0, width: 300, height: 500))
         cardView.center = view.center
+//        cardView.isOverlap = false
         view.addSubview(cardView)
         cardView?.delegate = self
         cardView?.dataSource = self
