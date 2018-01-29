@@ -20,16 +20,16 @@ eg:
 ```
 extension ViewController:CardViewDelegate {
 
-func didClick(cardView: CardView, with index: Int) {
-print("click index:\(index)")
-}
+    func didClick(cardView: CardView, with index: Int) {
+        print("click index:\(index)")
+    }
 
-func remove(cardView: CardView, item: CardItem, with index: Int) {
-print("remove:\(index)")
-if index == count - 1 {
-cardView.reloadData()
-}
-}
+    func remove(cardView: CardView, item: CardItem, with index: Int) {
+        print("remove:\(index)")
+        if index == count - 1 {
+            cardView.reloadData()
+        }
+    }
 
 }
 ```
@@ -37,25 +37,25 @@ cardView.reloadData()
 ```
 extension ViewController:CardViewDataSource {
 
-func numberOfItems(in cardView: CardView) -> Int {
-return count
-}
+    func numberOfItems(in cardView: CardView) -> Int {
+        return count
+    }
 
-func cardView(_ cardView:CardView, cellForItemAt Index:Int) ->CardItem {
+    func cardView(_ cardView:CardView, cellForItemAt Index:Int) ->CardItem {
 
-// first item at top.
-var item: ImageCardItem!
-if let image =UIImage(named:"img_0" +"\(Index)") {
-item = ImageCardItem(image: image)
-}
+        // first item at top.
+        var item: ImageCardItem!
+        if let image =UIImage(named:"img_0" +"\(Index)") {
+            item = ImageCardItem(image: image)
+        }
 
-if Index == count - 1 {
-addStartButton(item: item)
-// decide to pan
-item.isPan = false.
-}
-return item
-}
+        if Index == count - 1 {
+            addStartButton(item: item)
+            // decide to pan
+            item.isPan = false.
+        }
+        return item
+    }
 }
 ```
 
