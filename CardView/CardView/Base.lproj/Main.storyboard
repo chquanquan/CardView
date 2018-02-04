@@ -31,11 +31,26 @@
                                     <action selector="skipAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nbf-bz-ytE"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Lb-Cb-lRb">
+                                <rect key="frame" x="16" y="40" width="60" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="ILV-Wz-UBA"/>
+                                    <constraint firstAttribute="height" constant="20" id="XuH-Mm-G35"/>
+                                </constraints>
+                                <state key="normal" title="Revoke">
+                                    <color key="titleColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="revokeAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vfh-dr-yN9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="0Uu-yz-H7O" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="4Sz-ub-3qk"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0Uu-yz-H7O" secondAttribute="trailing" constant="20" id="FEh-Dk-nAa"/>
+                            <constraint firstItem="8Lb-Cb-lRb" firstAttribute="centerY" secondItem="0Uu-yz-H7O" secondAttribute="centerY" id="HTT-nq-xAF"/>
+                            <constraint firstItem="8Lb-Cb-lRb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="ZR9-ze-awe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

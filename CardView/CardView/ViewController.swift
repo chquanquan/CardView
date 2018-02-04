@@ -36,6 +36,11 @@ class ViewController: UIViewController {
         cardView.removeAll()
     }
     
+    @IBAction func revokeAction(_ sender: UIButton) {
+        cardView.revokeCard()
+    }
+    
+    
     
     
 
