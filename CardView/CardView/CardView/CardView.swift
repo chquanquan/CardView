@@ -18,6 +18,7 @@ enum CardDirection {
 protocol CardViewDelegate: AnyObject {
     func didClick(cardView: CardView, with index: Int)
     func remove(cardView: CardView, item: CardItem, with index: Int)
+    func revoke(cardView: CardView, item: CardItem, with index: Int)
 }
 
 protocol CardViewDataSource: AnyObject {
@@ -153,8 +154,10 @@ class CardView: UIView {
                 UIView.animate(withDuration: 0.25, animations: { [weak self] in
                     item.transform = CGAffineTransform.identity
                     self?.relayoutItem(isRevoke: true)
-                    }, completion: { (_) in
-                        
+                    }, completion: { [weak self] (_) in
+                        if self != nil {
+                            self?.delegate?.revoke(cardView: self!, item: item, with: index)
+                        }
                 })
             })
     

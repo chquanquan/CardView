@@ -53,6 +53,10 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: CardViewDelegate {
+    func revoke(cardView: CardView, item: CardItem, with index: Int) {
+        print("revoke index: \(index)")
+    }
+    
     
     func didClick(cardView: CardView, with index: Int) {
         print("click index: \(index)")
