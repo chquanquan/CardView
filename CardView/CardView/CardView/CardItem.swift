@@ -117,24 +117,30 @@ class CardItem: UIView {
     /// - Parameters:
     ///   - direction: 移除方向
     ///   - angle: 移除时候的角度,默认0
-    func remove(with direction: CardDirection = .right, angle: CGFloat = 0) {
-        UIView.animate(withDuration: 0.3, animations: {
-            [weak self] in guard let `self` = self else { return }
-            switch direction {
-            case .up:
-                self.center = CGPoint(x: self.center.x + self.currentAngle * self.frame.width + angle, y: self.frame.height - 1000)
-            case .left:
-                self.center = CGPoint(x: -1000, y: self.center.y + self.currentAngle * self.frame.height + angle)
-            case .down:
-                self.center = CGPoint(x: self.center.x + self.currentAngle * self.frame.width + angle, y: 1000)
-            case .right:
-                self.center = CGPoint(x: self.frame.width + 1000, y: self.center.y - self.currentAngle * self.frame.height + angle)
+    func remove(with direction: CardDirection = .right, angle: CGFloat = 0, animated: Bool = true) {
+        if animated {
+            UIView.animate(withDuration: 0.3, animations: {
+                [weak self] in guard let self = self else { return }
+                switch direction {
+                case .up:
+                    self.center = CGPoint(x: self.center.x + self.currentAngle * self.frame.width + angle, y: self.frame.height - 1000)
+                case .left:
+                    self.center = CGPoint(x: -1000, y: self.center.y + self.currentAngle * self.frame.height + angle)
+                case .down:
+                    self.center = CGPoint(x: self.center.x + self.currentAngle * self.frame.width + angle, y: 1000)
+                case .right:
+                    self.center = CGPoint(x: self.frame.width + 1000, y: self.center.y - self.currentAngle * self.frame.height + angle)
+                }
+            }) { [weak self] (_) in
+                guard let `self` = self else { return }
+                self.removeFromSuperview()
+                self.delegate?.removeFromSuperView(item: self)
             }
-        }) { [weak self] (_) in
-            guard let `self` = self else { return }
-            self.removeFromSuperview()
-            self.delegate?.removeFromSuperView(item: self)
+        } else {
+            removeFromSuperview()
+            delegate?.removeFromSuperView(item: self)
         }
+
     }
     
 }

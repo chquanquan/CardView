@@ -43,6 +43,9 @@ class CardView: UIView {
     
     ///是否完全重叠,默认否
     var isOverlap = false
+    var isEmpty: Bool {
+        return count == 0
+    }
     
     private var count: Int = 0
     private var lastFrames = [Int: CGRect]()
@@ -56,7 +59,6 @@ class CardView: UIView {
     }
     
     func reloadData() {
-        
         guard let dataSource = dataSource else { return }
         count = dataSource.numberOfItems(in: self)
         for index in 0..<count {
@@ -120,12 +122,17 @@ class CardView: UIView {
         return dataSource.cardView(self, cellForItemAt: index)
     }
     
-    func removeAll() {
+    func removeAll(animated: Bool = true) {
         for (index, item) in subviews.reversed().enumerated() {
             if let item = item as? CardItem {
-                DispatchQueue.main.asyncAfter(deadline: .now() + (0.1 * Double(index)), execute: {
-                    item.remove()
-                })
+                if animated {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + (0.1 * Double(index)), execute: {
+                        item.remove(animated: true)
+                    })
+                } else {
+                    item.remove(animated: false)
+                }
+                
             }
         }
     }

@@ -12,11 +12,15 @@ class ViewController: UIViewController {
     let count = 6
     var cardView: CardView!
     var startButton: UIButton?
-
+    @IBOutlet weak var autoReloadSwitch: UISwitch!
+    @IBOutlet weak var skipAnimateSwitch: UISwitch!
+    @IBOutlet weak var reloadButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         addCardView()
+        view.bringSubviewToFront(reloadButton)
     }
     
     func addCardView() {
@@ -33,15 +37,33 @@ class ViewController: UIViewController {
     
     @IBAction func skipAction(_ sender: UIButton) {
 //        cardView.removeTopItem()
-        cardView.removeAll()
+        cardView.removeAll(animated: skipAnimateSwitch.isOn)
     }
     
     @IBAction func revokeAction(_ sender: UIButton) {
         cardView.revokeCard()
     }
     
+    @IBAction func overlapValueChanged(_ sender: UISwitch) {
+        cardView.isOverlap = sender.isOn
+        cardView.removeAll(animated: false)
+        reloadButton.isHidden = true
+        cardView.reloadData()
+        
+    }
     
     
+    @IBAction func autoReloadValueChanged(_ sender: UISwitch) {
+        if cardView.isEmpty {
+            reloadButton.isHidden = true
+            cardView.reloadData()
+        }
+    }
+    
+    @IBAction func reload(_ sender: UIButton) {
+        sender.isHidden = true
+        cardView.reloadData()
+    }
     
 
     override func didReceiveMemoryWarning() {
@@ -65,7 +87,11 @@ extension ViewController: CardViewDelegate {
     func remove(cardView: CardView, item: CardItem, with index: Int) {
         print("remove: \(index)")
         if index == count - 1 {
-            cardView.reloadData()
+            if autoReloadSwitch.isOn {
+                cardView.reloadData()
+            } else {
+                reloadButton.isHidden = false
+            }
         }
     }
     
